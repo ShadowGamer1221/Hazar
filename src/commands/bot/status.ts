@@ -29,15 +29,15 @@ class StatusCommand extends Command {
                     type: 'String',
               },
               {
-                trigger: 'value',
-                description: 'The description.',
+                trigger: 'url',
+                description: 'The streaming URL.',
                 isLegacyFlag: false,
                 required: true,
                 type: 'String',
               },
               {
-                trigger: 'url',
-                description: 'The streaming URL.',
+                trigger: 'value',
+                description: 'The description.',
                 isLegacyFlag: false,
                 required: false,
                 type: 'String',
@@ -57,9 +57,7 @@ class StatusCommand extends Command {
 
 const type = ctx.args['type'];
 const value = ctx.args['value'];
-let streamUrl = ctx.args['url'];
-streamUrl = streamUrl.replace("'","");
-streamUrl = streamUrl.replace("'","");
+const streamUrl = ctx.args['url'];
 
   const successEmbed = new MessageEmbed()
 .setColor('GREEN')
