@@ -36,7 +36,7 @@ class RestartCommand extends Command {
 .setColor('GREEN')
 .setDescription(`**Restarting Server...**`)
 
-ctx.reply({ embeds: [successEmbed] });
+await ctx.reply({ embeds: [successEmbed] });
  process.exit();
     }
 }
