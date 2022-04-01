@@ -42,7 +42,7 @@ class ActivitycheckCommand extends Command {
     async run(ctx: CommandContext) {
 
   let channelSend: TextChannel;
-        channelSend = await discordClient.channels.fetch('909397619237859369') as TextChannel;
+        channelSend = await discordClient.channels.fetch('945383367556354078') as TextChannel;
         console.log(channelSend)
             let user = ctx.args['roblox-user'];
             console.log(user)
@@ -73,8 +73,8 @@ await message389789.react('<:eastside:866583276201574410>');
     ctx.reply({ embeds: [successEmbed] })
 
    let message86687 = await channelSend.send({
-        content: '<@&878357865293819954> <@&863399377606148106> <@&862449430871670845> <@&862449996665454612>',
-        allowedMentions: { roles: ['862449996665454612', '862449430871670845', '863399377606148106', '878357865293819954'] },
+        content: '<@&945364001523638282> <@&945364076626853928> <@&945364153919488000> <@&945364146470400060>',
+        allowedMentions: { roles: ['945364001523638282', '945364076626853928', '945364153919488000', '945364146470400060'] },
     });
     }
     }
