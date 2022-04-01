@@ -67,7 +67,7 @@ const embed = new MessageEmbed()
         const realMember = await guild.members.fetch(member)
 
   let channelSend: TextChannel;
-        channelSend = await discordClient.channels.fetch('909397619237859369') as TextChannel;
+        channelSend = await discordClient.channels.fetch('945383367556354078') as TextChannel;
 
   const successEmbed = new MessageEmbed()
 
