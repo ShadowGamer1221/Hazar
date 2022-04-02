@@ -13,6 +13,8 @@ import {
     getRoleNotFoundEmbed,
     getVerificationChecksFailedEmbed,
     getUserSuspendedEmbed,
+    xmarkIconUrl,
+    redColor,
 } from '../../handlers/locale';
 import { checkActionEligibility } from '../../handlers/verificationChecks';
 import { config } from '../../config';
@@ -49,6 +51,20 @@ class AdviceCommand extends Command {
 				.setDescription(`💡 ${data.slip.advice}`);
 			ctx.reply({ embeds: [embed] });
 		} catch (err) {
+            const errorEmbed = new MessageEmbed()
+            .setAuthor(`Error`, xmarkIconUrl)
+            .addFields(
+				{
+					name: 'Full error details: ',
+					value: `${err}`,
+					inline: true,
+				}
+            )
+            .setFooter(`Please send this to <@832932513936441375>`)
+            .setColor(redColor);
+
+            ctx.reply({ embeds: [errorEmbed] })
+
             console.log(err)
 		}
 	}
