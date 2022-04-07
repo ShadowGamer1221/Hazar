@@ -32,7 +32,7 @@ class GroupinfoCommand extends Command {
             module: 'information',
             args: [
                 {
-                    trigger: 'groupId',
+                    trigger: 'group-id',
                     description: 'The group ID of the group.',
                     required: true,
                     type: 'Number',
