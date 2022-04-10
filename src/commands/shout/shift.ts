@@ -1,21 +1,35 @@
 import { discordClient, robloxClient, robloxGroup } from '../../main';
+import { ButtonInteraction, CommandInteraction, Interaction, Message, MessageActionRow, MessageButton, MessageButtonStyleResolvable, TextChannel } from 'discord.js';
+import { GetGroupRoles } from 'bloxy/src/client/apis/GroupsAPI';
 import { CommandContext } from '../../structures/addons/CommandAddons';
 import { Command } from '../../structures/Command';
+import { MessageEmbed } from 'discord.js';
 import {
-    getUnexpectedErrorEmbed,
-    getSuccessfulShoutEmbed,
     getInvalidRobloxUserEmbed,
+    getRobloxUserIsNotMemberEmbed,
+    getSuccessfulPromotionEmbed,
+    getUnexpectedErrorEmbed,
+    getNoRankAboveEmbed,
+    getRoleNotFoundEmbed,
+    getVerificationChecksFailedEmbed,
+    getUserSuspendedEmbed,
+    checkIconUrl,
+    mainColor,
+    infoIconUrl,
+    xmarkIconUrl,
+    redColor,
+    greenColor,
     getSuccessfulTrainingEmbed,
     getSuccessfulShiftingEmbed,
-    checkIconUrl,
-    greenColor,
 } from '../../handlers/locale';
+import { checkActionEligibility } from '../../handlers/verificationChecks';
 import { config } from '../../config';
+import { User, PartialUser, GroupMember } from 'bloxy/dist/structures';
 import { logAction } from '../../handlers/handleLogging';
 import { getLinkedRobloxUser } from '../../handlers/accountLinks';
-import { User, PartialUser, GroupMember } from 'bloxy/dist/structures';
-import { MessageEmbed, TextChannel } from 'discord.js';
-
+import { provider } from '../../database/router';
+import Discord from 'discord.js';
+ 
 class ShiftCommand extends Command {
     constructor() {
         super({
@@ -34,11 +48,8 @@ class ShiftCommand extends Command {
         });
     }
 
+
     async run(ctx: CommandContext) {
-
-        const usermember = ctx.user.id
-        const realmember = await ctx.guild.members.fetch(usermember)
-
         let robloxUser: User | PartialUser;
                 try {
                     const idQuery = ctx.user;
@@ -51,6 +62,19 @@ class ShiftCommand extends Command {
                     return ctx.reply({ embeds: [ getInvalidRobloxUserEmbed() ]});
                 }
 
+        let robloxMember: GroupMember;
+        try {
+            robloxMember = await robloxGroup.getMember(robloxUser.id);
+            if(!robloxMember) throw new Error();
+        } catch (err) {
+            return ctx.reply({ embeds: [ getRobloxUserIsNotMemberEmbed() ]});
+        }
+
+        if(config.database.enabled) {
+            const userData = await provider.findUser(robloxUser.id.toString());
+            if(userData.suspendedUntil) return ctx.reply({ embeds: [ getUserSuspendedEmbed() ] });
+        }
+
         try {
             await robloxGroup.updateShout(`Greetings! There is a shift being hosted by ${robloxUser.name}. Join for a chance of being promoted!\n\n~| GAME LINK: https://www.roblox.com/games/8897440496/BETA-Eastside-Cafe-Hotels-Resorts\n\nsigned,\n${robloxUser.name}`);
             ctx.reply({ embeds: [ await getSuccessfulShiftingEmbed() ]});
@@ -60,22 +84,79 @@ class ShiftCommand extends Command {
             return ctx.reply({ embeds: [ getUnexpectedErrorEmbed() ]});
         }
 
-        let channelSend: TextChannel;
-        channelSend = await discordClient.channels.fetch('945372794651283536') as TextChannel;
+        const channelSend = await discordClient.channels.fetch('945372794651283536') as TextChannel;
         console.log(channelSend)
 
-        const successEmbed = new MessageEmbed()
-        .setColor(greenColor)
-        .setDescription(`Greetings! There is a shift being hosted by ${robloxUser.name}. Join for a chance of being promoted!\n\n~| GAME LINK: https://www.roblox.com/games/8897440496/BETA-Eastside-Cafe-Hotels-Resorts\n\nsigned,\n${robloxUser.name}`)
-        .setTimestamp();
 
-        await channelSend.send({ embeds: [successEmbed] })
+        const sugEmbed = new Discord.MessageEmbed()
+                    .setColor(greenColor)
+                    .setDescription(`Greetings! There is a shift being hosted by ${robloxUser.name}. Join for a chance of being promoted!\n\n~| GAME LINK: https://www.roblox.com/games/8897440496/BETA-Eastside-Cafe-Hotels-Resorts\n\nsigned,\n${robloxUser.name}`)
+                    .setTimestamp()
+        
+                const row = new Discord.MessageActionRow().addComponents(
+        
+                    new Discord.MessageButton()
+                        .setCustomId("sug-acc")
+                        .setStyle("DANGER")
+                        .setLabel("Cancel Shift"),
 
-        let message = await channelSend.send({
-            content: '<@&945394793796747285>',
-            allowedMentions: { roles: ['945394793796747285'] },
-        });
+                        new Discord.MessageButton()
+                        .setCustomId("sug-accsadadsdsa")
+                        .setStyle("SUCCESS")
+                        .setLabel("End Shift"),
+
+                        new Discord.MessageButton()
+                        .setStyle("LINK")
+                        .setLabel("Server")
+                        .setURL("https://www.roblox.com/games/8897440496/BETA-Eastside-Cafe-Hotels-Resorts"),
+        
+                )
+        
+                const sugPage = await channelSend.send({ embeds: [sugEmbed], components: [row] })
+        
+                const col = await sugPage.createMessageComponentCollector({
+                    componentType: "BUTTON"
+                })
+        
+                col.on("collect", async i => {
+        
+                    const interactor = i.guild.members.cache.get(i.user.id)
+        
+                    if (!interactor.roles.cache.some(role => role.name === 'E | Shout Permissions')) return
+        
+                    if (i.customId === "sug-acc") {
+                        
+                        await channelSend.bulkDelete(2)
+
+                        try {
+                            await robloxGroup.updateShout(``);
+                            logAction('Canceled Shift', ctx.user);
+                        } catch (err) {
+                            console.log(err);
+                        }
+                    }
+
+                if (i.customId === "sug-accsadadsdsa") {
+        
+                    await channelSend.bulkDelete(2)
+
+                    try {
+                        await robloxGroup.updateShout(``);
+                        logAction('Finished Shift', ctx.user);
+                    } catch (err) {
+                        console.log(err);
+                    }
+                }
+
+                })
+
+                let message = await channelSend.send({
+                    content: '<@&945394793796747285>',
+                    allowedMentions: { roles: ['945394793796747285'] },
+                });
+
+                
     }
 }
-
+ 
 export default ShiftCommand;
