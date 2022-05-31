@@ -54,7 +54,7 @@ class ServerinfoCommand extends Command {
 			.addFields(
 				{
 					name: 'Owner: ',
-					value: `<@832932513936441375>`,
+					value: `<@840564478676041748>`,
 					inline: true,
 				},
 				{

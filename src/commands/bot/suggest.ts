@@ -51,7 +51,7 @@ class SuggestCommand extends Command {
     async run(ctx: CommandContext) {
 
   let channelSend: TextChannel;
-        channelSend = await discordClient.channels.fetch('945372048493006949') as TextChannel;
+        channelSend = await discordClient.channels.fetch('948970494948958248') as TextChannel;
         console.log(channelSend)
         
                 const query = ctx.args['suggestion']

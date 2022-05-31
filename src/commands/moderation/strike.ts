@@ -91,7 +91,7 @@ const errorEmbed = new MessageEmbed()
 ctx.reply({ embeds: [successEmbed] });
   
   let warnembed = new MessageEmbed()
-  .setDescription(`**Server:** ${ctx.guild.name}\n**Actioned by:** <@${ctx.user.id}>\n**Action:** Strike\n**Additional Information:** Hello <@${member}>, I'm here to inform you that you just got a strike from our Staffing Team. If you think this is a misstake please contact the <@900419463281774632>. Remind: After 3 strikes you will get an 7 day suspension.\n**Reason:** ${reason}`)
+  .setDescription(`**Server:** ${ctx.guild.name}\n**Actioned by:** <@${ctx.user.id}>\n**Action:** Strike\n**Additional Information:** Hello <@${member}>, I'm here to inform you that you just got a strike from our Staffing Team. If you think this is a misstake please contact the staffing department. Remind: After 3 strikes you will be terminated.\n**Reason:** ${reason}`)
   .setColor('RED')
   .setTimestamp();
   

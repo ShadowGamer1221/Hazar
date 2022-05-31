@@ -29,13 +29,6 @@ class StatusCommand extends Command {
                     type: 'String',
               },
               {
-                trigger: 'url',
-                description: 'The streaming URL.',
-                isLegacyFlag: false,
-                required: true,
-                type: 'String',
-              },
-              {
                 trigger: 'value',
                 description: 'The description.',
                 isLegacyFlag: false,
@@ -57,7 +50,6 @@ class StatusCommand extends Command {
 
 const type = ctx.args['type'];
 const value = ctx.args['value'];
-const streamUrl = ctx.args['url'];
 
   const successEmbed = new MessageEmbed()
 .setColor('GREEN')
@@ -68,7 +60,6 @@ ctx.reply({ embeds: [successEmbed] });
 
 discordClient.user.setActivity(value, {
     type: type,
-    url: streamUrl,
 });
     }
 }

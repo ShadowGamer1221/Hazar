@@ -76,7 +76,7 @@ class ShiftCommand extends Command {
         }
 
         try {
-            await robloxGroup.updateShout(`Greetings! There is a shift being hosted by ${robloxUser.name}. Join for a chance of being promoted!\n\n~| GAME LINK: https://www.roblox.com/games/8897440496/BETA-Eastside-Cafe-Hotels-Resorts\n\nsigned,\n${robloxUser.name}`);
+            await robloxGroup.updateShout(`Greetings! There is a shift being hosted by ${robloxUser.name}. Join for a chance of being promoted!\n\n~| GAME LINK: https://www.roblox.com/games/9046720130/Work-at-a-Cafe-Hazar-Cafe\n\nsigned,\n${robloxUser.name}`);
             ctx.reply({ embeds: [ await getSuccessfulShiftingEmbed() ]});
             logAction('Shift Announcement', ctx.user);
         } catch (err) {
@@ -90,7 +90,7 @@ class ShiftCommand extends Command {
 
         const sugEmbed = new Discord.MessageEmbed()
                     .setColor(greenColor)
-                    .setDescription(`Greetings! There is a shift being hosted by ${robloxUser.name}. Join for a chance of being promoted!\n\n~| GAME LINK: https://www.roblox.com/games/8897440496/BETA-Eastside-Cafe-Hotels-Resorts\n\nsigned,\n${robloxUser.name}`)
+                    .setDescription(`Greetings! There is a shift being hosted by ${robloxUser.name}. Join for a chance of being promoted!\n\n~| GAME LINK: https://www.roblox.com/games/9046720130/Work-at-a-Cafe-Hazar-Cafe\n\nsigned,\n${robloxUser.name}`)
                     .setTimestamp()
         
                 const row = new Discord.MessageActionRow().addComponents(
@@ -108,7 +108,7 @@ class ShiftCommand extends Command {
                         new Discord.MessageButton()
                         .setStyle("LINK")
                         .setLabel("Server")
-                        .setURL("https://www.roblox.com/games/8897440496/BETA-Eastside-Cafe-Hotels-Resorts"),
+                        .setURL("https://www.roblox.com/games/9046720130/Work-at-a-Cafe-Hazar-Cafe"),
         
                 )
         
@@ -122,7 +122,7 @@ class ShiftCommand extends Command {
         
                     const interactor = i.guild.members.cache.get(i.user.id)
         
-                    if (!interactor.roles.cache.some(role => role.name === 'E | Shout Permissions')) return
+                    if (!interactor.roles.cache.some(role => role.name === 'H | Shout Permissions')) return
         
                     if (i.customId === "sug-acc") {
                         
@@ -151,8 +151,8 @@ class ShiftCommand extends Command {
                 })
 
                 let message = await channelSend.send({
-                    content: '<@&945394793796747285>',
-                    allowedMentions: { roles: ['945394793796747285'] },
+                    content: '<@&951934159088144394>',
+                    allowedMentions: { roles: ['951934159088144394'] },
                 });
 
                 

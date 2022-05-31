@@ -1,24 +1,24 @@
 import { BotConfig } from './structures/types'; 
 
 export const config: BotConfig = {
-    groupId: 14113482,
+    groupId: 14285673,
     slashCommands: true,
     legacyCommands: {
         enabled: true,
-        prefixes: ['!!'],
+        prefixes: ['..'],
     },
     permissions: {
-        all: ['945362316633993226', '945362317464444928'],
-        ranking: ['945388991463686174'],
+        all: ['967676830679199744', '948965727405232171'],
+        ranking: ['967684006143492107'],
         users: [''],
-        verified: ['945363366334070855'],
-        shout: ['945388997260243003'],
-        join: ['945404307753304185'],
+        verified: ['948974931025207406'],
+        shout: ['967684124171190282'],
+        join: ['967684153229328424'],
         signal: ['945362316633993226', '945362317464444928'],
-        admin: ['945364791965405284', '945364783505502291'],
+        admin: ['949002777684754482', '949002854197231666', '949002827647311902', '949002799511928913', '949002777684754482', '949002740372230144'],
     },
     logChannels: {
-        actions: '945399410777550968',
+        actions: '967683099712450600',
         shout: '',
     },
     database: {
@@ -26,7 +26,7 @@ export const config: BotConfig = {
         type: 'mongodb',
     },
     api: true,
-    maximumRank: 102,
+    maximumRank: 200,
     verificationChecks: true,
     firedRank: 1,
     suspendedRank: 2,
@@ -34,12 +34,12 @@ export const config: BotConfig = {
     recordManualActions: true,
     memberCount: {
         enabled: true,
-        channelId: '945397279043497994',
+        channelId: '967688161725669428',
         milestone: 100,
         onlyMilestones: false,
     },
      xpSystem: {
-        enabled: true,
+        enabled: false,
         autoRankup: false,
         roles: [
             
@@ -98,9 +98,9 @@ export const config: BotConfig = {
             
         ],
     },
-    requestChannel: '945383871992692796',
+    requestChannel: '967688590752637028',
     antiAbuse: {
-        enabled: true,
+        enabled: false,
         clearDuration: 1 * 60,
         threshold: 5,
         demotionRank: 3,

@@ -42,7 +42,7 @@ class ActivitycheckCommand extends Command {
     async run(ctx: CommandContext) {
 
   let channelSend: TextChannel;
-        channelSend = await discordClient.channels.fetch('945383367556354078') as TextChannel;
+        channelSend = await discordClient.channels.fetch('949680416447660044') as TextChannel;
         console.log(channelSend)
             let user = ctx.args['roblox-user'];
             console.log(user)
@@ -57,13 +57,13 @@ class ActivitycheckCommand extends Command {
      console.log(dizzyMember)
 
    const e = new MessageEmbed()
-   .setTitle('**<:eastside:866583276201574410> | ACTIVITY CHECK**')
+   .setTitle('**<:HazarCafeLogo:961960151340961802> | ACTIVITY CHECK**')
    .setDescription('It’s time for our weekly activity check! I ask for all MRs+ to interact with this message when it is viewed.\n\nI pay very close attention to the activity checks, and sometimes I may even promote!')
    .setColor('#43d177')
    .setFooter('Note: If you not react in 72 hours you will get an strike')
    .setTimestamp()
 let message389789 = await channelSend.send({ embeds: [e] })
-await message389789.react('<:eastside:866583276201574410>');
+await message389789.react('<:HazarCafeLogo:961960151340961802>');
 
     const successEmbed = new MessageEmbed()
     .setAuthor(ctx.user.tag, ctx.user.displayAvatarURL())
@@ -73,8 +73,8 @@ await message389789.react('<:eastside:866583276201574410>');
     ctx.reply({ embeds: [successEmbed] })
 
    let message86687 = await channelSend.send({
-        content: '<@&945364001523638282> <@&945364076626853928> <@&945364153919488000> <@&945364146470400060>',
-        allowedMentions: { roles: ['945364001523638282', '945364076626853928', '945364153919488000', '945364146470400060'] },
+        content: '<@&949000387371880448> <@&949000411325530122> <@&949000435509915648> <@&948971207821230111> <@&950813346188374076>',
+        allowedMentions: { roles: ['949000387371880448', '949000411325530122', '949000435509915648', '948971207821230111', '950813346188374076'] },
     });
     }
     }

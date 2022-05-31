@@ -75,7 +75,7 @@ class TrainingCommand extends Command {
         }
 
         try {
-            await robloxGroup.updateShout(`Greetings! There is a training being hosted by ${robloxUser.name}. Join for a chance of being promoted!\n\n~| GAME LINK: https://www.roblox.com/games/8897440496/BETA-Eastside-Cafe-Hotels-Resorts\n\nsigned,\n${robloxUser.name}`);
+            await robloxGroup.updateShout(`Greetings! There is a training being hosted by ${robloxUser.name}. Join for a chance of being promoted!\n\n~| GAME LINK: https://www.roblox.com/games/9046755817/Hazar-Cafe-Training-Center\n\nsigned,\n${robloxUser.name}`);
             ctx.reply({ embeds: [ await getSuccessfulTrainingEmbed() ]});
             logAction('Training Announcement', ctx.user);
         } catch (err) {
@@ -83,13 +83,13 @@ class TrainingCommand extends Command {
             return ctx.reply({ embeds: [ getUnexpectedErrorEmbed() ]});
         }
 
-        const channelSend = await discordClient.channels.fetch('945372794651283536') as TextChannel;
+        const channelSend = await discordClient.channels.fetch('948969696865177650') as TextChannel;
         console.log(channelSend)
 
 
         const sugEmbed = new Discord.MessageEmbed()
                     .setColor(greenColor)
-                    .setDescription(`Greetings! There is a training being hosted by ${robloxUser.name}. Join for a chance of being promoted!\n\n~| GAME LINK: https://www.roblox.com/games/8897440496/BETA-Eastside-Cafe-Hotels-Resorts\n\nsigned,\n${robloxUser.name}`)
+                    .setDescription(`Greetings! There is a training being hosted by ${robloxUser.name}. Join for a chance of being promoted!\n\n~| GAME LINK: https://www.roblox.com/games/9046755817/Hazar-Cafe-Training-Center\n\nsigned,\n${robloxUser.name}`)
                     .setTimestamp()
         
                 const row = new Discord.MessageActionRow().addComponents(
@@ -107,7 +107,7 @@ class TrainingCommand extends Command {
                         new Discord.MessageButton()
                         .setStyle("LINK")
                         .setLabel("Server")
-                        .setURL("https://www.roblox.com/games/8897440496/BETA-Eastside-Cafe-Hotels-Resorts"),
+                        .setURL("https://www.roblox.com/games/9046755817/Hazar-Cafe-Training-Center"),
         
                 )
         
@@ -121,7 +121,7 @@ class TrainingCommand extends Command {
         
                     const interactor = i.guild.members.cache.get(i.user.id)
         
-                    if (!interactor.roles.cache.some(role => role.name === 'E | Shout Permissions')) return
+                    if (!interactor.roles.cache.some(role => role.name === 'H | Shout Permissions')) return
         
                     if (i.customId === "sug-acc") {
                         
@@ -150,8 +150,8 @@ class TrainingCommand extends Command {
                 })
 
                 let message = await channelSend.send({
-                    content: '<@&945394793796747285>',
-                    allowedMentions: { roles: ['945394793796747285'] },
+                    content: '<@&951934159088144394>',
+                    allowedMentions: { roles: ['951934159088144394'] },
                 });
 
                 

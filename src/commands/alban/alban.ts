@@ -51,8 +51,6 @@ class AlbanCommand extends Command {
         .setFooter(`Best person on the server`)
         .setTimestamp()
 
-        const choices = ctx.command.options[0].choices // get choices of first option
-
         ctx.reply({ embeds: [albanEmbed] });
 
     }
